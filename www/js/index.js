@@ -64,31 +64,43 @@ var app = {
 
 app.initialize();
 
-jQuery(document).ready(function($) {
-    $('#gallery-1').royalSlider({
-        fullscreen: {
-            enabled: true,
-            nativeFS: false
+$(document).ready(function() {
+
+    $('#raizen-slider').flexslider({
+        animation: 'slide',
+        animationLoop: false,
+        slideshow: false,
+        controlNav: false,
+        directionNav: false,
+        smoothHeight: true,
+        start: function() {
+            $('.btn-presenca-digital').on('click', function(e){
+                e.preventDefault();
+                $('#raizen-slider').flexslider(0);
+            });
+
+            $('.btn-etanol-2g').on('click', function(e){
+                e.preventDefault();
+                $('#raizen-slider').flexslider(8);
+            });
+
+            $('.btn-programa-estagio').on('click', function(e){
+                e.preventDefault();
+                $('#raizen-slider').flexslider(15);
+            });
         },
-        controlNavigation: 'thumbnails',
-        autoScaleSlider: true, 
-        // autoScaleSliderWidth: 960,     
-        // autoScaleSliderHeight: 850,
-        loop: false,
-        imageScaleMode: 'fit-if-smaller',
-        navigateByClick: true,
-        numImagesToPreload: 2,
-        arrowsNav: true,
-        arrowsNavAutoHide: true,
-        arrowsNavHideOnTouch: true,
-        keyboardNavEnabled: true,
-        fadeinLoadedSlide: true,
-        globalCaption: false,
-        globalCaptionInside: false,
-        thumbs: {
-            appendSpan: true,
-            firstMargin: true,
-            paddingBottom: 4
+        after: function() {
+            $('.raizen-menu-bottom a').removeClass('ativo');
+            if($('.flex-active-slide').hasClass('raizen-presenca-digital')) {
+                $('.raizen-menu-bottom a.btn-presenca-digital').addClass('ativo');
+            }
+            else if($('.flex-active-slide').hasClass('raizen-etanol-2g')) {
+                $('.raizen-menu-bottom a.btn-etanol-2g').addClass('ativo');
+            }
+            else if($('.flex-active-slide').hasClass('raizen-programa-estagio')) {
+                $('.raizen-menu-bottom a.btn-programa-estagio').addClass('ativo');
+            }
         }
     });
+
 });
